@@ -146,6 +146,8 @@ app.use(session({
 
 __Note:__ Each time an user interacts with the server, its session expiration date is refreshed.
 
+You can pass `ttl` a function that, given a current session, returns a new TTL value.
+
 ## Remove expired sessions
 
 By default, `connect-mongo` uses MongoDB's TTL collection feature (2.2+) to have mongod automatically remove expired sessions. But you can change this behavior.

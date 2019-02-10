@@ -232,7 +232,8 @@ module.exports = function (connect) {
         // So we set the expiration to two-weeks from now
         // - as is common practice in the industry (e.g Django) -
         // or the default specified in the options.
-        s.expires = new Date(Date.now() + (this.ttl * 1000))
+        const ttl = (typeof this.ttl === 'function') ? this.ttl(session) : this.ttl
+        s.expires = new Date(Date.now() + (ttl * 1000))
       }
 
       if (this.options.touchAfter > 0) {
@@ -276,7 +277,8 @@ module.exports = function (connect) {
       if (session && session.cookie && session.cookie.expires) {
         updateFields.expires = new Date(session.cookie.expires)
       } else {
-        updateFields.expires = new Date(Date.now() + (this.ttl * 1000))
+        const ttl = (typeof this.ttl === 'function') ? this.ttl(session) : this.ttl
+        updateFields.expires = new Date(Date.now() + (ttl * 1000))
       }
 
       return withCallback(this.collectionReady()
