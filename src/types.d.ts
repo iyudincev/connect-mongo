@@ -64,7 +64,7 @@ declare namespace connectMongo {
         /**
          * Default: 14 days (60 * 60 * 24 * 14)
          */
-        ttl?: number;
+        ttl?: number | ((object) => number);
 
         /**
          * Automatically remove expired sessions.
